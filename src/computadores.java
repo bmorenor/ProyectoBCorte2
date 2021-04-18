@@ -39,7 +39,7 @@ public class computadores {
                             list_conexiones.add(conexion);
                         }
                         add(n, m, a, b, list_conexiones);
-                        minimo_Tiempo(list_Casos, i);
+                        System.out.println(minimo_Tiempo(list_Casos, i));
                     }
                 } else {
                     System.out.println("Inalcanzable");
