@@ -25,7 +25,8 @@ public class computadores {
      */
     public static void main(String[] args) {
 
-        t = read.nextInt();
+        String t1 = read.nextLine();
+        t = Integer.parseInt(t1.trim());
         if (0 < t && t < 1000000) {
             for (int i = 1; i <= t; i++) {
                 String numeros = read.nextLine();
