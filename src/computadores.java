@@ -41,11 +41,12 @@ public class computadores {
                         }
                         add(n, m, a, b, list_conexiones);
                         System.out.println(minimo_Tiempo(list_Casos, i));
+                        list_conexiones.clear();
                     }
                 } else {
                     System.out.println("Inalcanzable");
                 }
-                list_conexiones.clear();
+
             }
         }
     }
@@ -67,10 +68,27 @@ public class computadores {
     }
 
     public static void numeros(String string) {
-
+        int inicio = string.indexOf(",");
+        Stack<String> numeros = new Stack();
+        for (int i = 0; i < 4; i++) {
+            numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
+        }
+        n = Integer.parseInt(numeros.get(0));
+        m = Integer.parseInt(numeros.get(1));
+        a = Integer.parseInt(numeros.get(2));
+        b = Integer.parseInt(numeros.get(3));
+        numeros.clear();
     }
 
     public static void numeros_2(String string) {
-
+        int inicio = string.indexOf(",");
+        Stack<String> numeros = new Stack();
+        for (int i = 0; i < 4; i++) {
+            numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
+        }
+        u = Integer.parseInt(numeros.get(0));
+        v = Integer.parseInt(numeros.get(1));
+        w = Integer.parseInt(numeros.get(2));
+        numeros.clear();
     }
 }
