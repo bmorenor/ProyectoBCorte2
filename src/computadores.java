@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Stack;
@@ -8,7 +9,7 @@ import java.util.Stack;
 public class computadores {
     private static Scanner read;
     private static List<Caso> list_Casos;
-    private static Stack<Conexion> list_conexiones;
+    private static List<Conexion> list_conexiones;
     private static int t;
     private static int n;
     private static int m;
@@ -51,7 +52,7 @@ public class computadores {
         }
     }
 
-    public static void add(int n, int m, int a, int b, Stack<Conexion> list) {
+    public static void add(int n, int m, int a, int b, List<Conexion> list) {
         Caso caso = new Caso(n, m, a, b, list);
         list_Casos.add(caso);
     }
@@ -59,6 +60,7 @@ public class computadores {
     public static String minimo_Tiempo(List<Caso> lista_De_Casos, int caso) {
         String retorno;
         int tiempo_Menor = 0;
+
 
 
         retorno = "Caso#" + caso + ":\n" +
@@ -69,7 +71,7 @@ public class computadores {
 
     public static void numeros(String string) {
         int inicio = string.indexOf(",");
-        Stack<String> numeros = new Stack();
+        List<String> numeros = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
         }
@@ -82,7 +84,7 @@ public class computadores {
 
     public static void numeros_2(String string) {
         int inicio = string.indexOf(",");
-        Stack<String> numeros = new Stack();
+        List<String> numeros = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
         }

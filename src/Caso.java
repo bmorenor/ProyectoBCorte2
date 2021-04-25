@@ -1,3 +1,4 @@
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -8,7 +9,7 @@ public class Caso {
     private int numero_De_Conexiones;
     private int computador_A;
     private int computador_B;
-    private Stack<Conexion> conexion;
+    private List<Conexion> conexion;
 
     /**
      * Constructor
@@ -18,7 +19,7 @@ public class Caso {
      * @param computador_B
      * @param conexion
      */
-    public Caso(int numero_De_Computadores, int numero_De_Conexiones, int computador_A, int computador_B,Stack<Conexion> conexion) {
+    public Caso(int numero_De_Computadores, int numero_De_Conexiones, int computador_A, int computador_B,List<Conexion> conexion) {
         this.numero_De_Computadores = numero_De_Computadores;
         this.numero_De_Conexiones = numero_De_Conexiones;
         this.computador_A = computador_A;
