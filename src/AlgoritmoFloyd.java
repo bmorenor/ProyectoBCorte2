@@ -4,6 +4,7 @@ public class AlgoritmoFloyd {
         {
             int n=adyacencia.length;
             long D[][]=adyacencia;
+            String resultado ="";
 
             String enlaces[][]=new String [n][n];
             String[][] aux_enlaces=new String[adyacencia.length][adyacencia.length];
@@ -52,15 +53,18 @@ public class AlgoritmoFloyd {
                     {
                         if(enlaces[i][j].equals("")==true)
                         {
-                            enlacesres+=" De ( "+(i+1)+" a "+(j+1)+" ) = "+"( "+(i+1)+" , "+(j+1)+" )"+"\n";
+                            enlacesres+=" De ( "+(i)+" a "+(j)+" ) = "+"( "+(i)+" , "+(j)+" )"+"\n";
+                            System.out.println(D[i][j]+"");
                         }
                         else
-                            enlacesres+=" De ( "+(i+1)+" a "+(j+1)+" ) = ( "+(i+1)+" , "+enlaces[i][j]+" , "+(j+1)+")\n";
+                            enlacesres+=" De ( "+(i)+" a "+(j)+" ) = ( "+(i)+" , "+enlaces[i][j]+" , "+(j)+")\n";
+                        System.out.println(D[i][j]+"");
                     }
                 }
             }
 
-            return "las distancias minimas entre nodos son: \n"+cadena+"\nlos caminos minimos entre nodosson:\n"+enlacesres;
+            return "las distancias minimas entre nodos son: \n"+cadena+"\nlos caminos minimos entre nodos son:\n"+enlacesres+
+                    "\nresultado: "+resultado;
         }
 
         public String enlaces(int i,int k,String[][] aux_enlaces,String enl_rec)
