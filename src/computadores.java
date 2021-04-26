@@ -19,6 +19,7 @@ public class computadores {
     private static int v;
     private static int w;
 
+
     /**
      * Main
      *
@@ -60,8 +61,9 @@ public class computadores {
     public static String minimo_Tiempo(List<Caso> lista_De_Casos, int caso) {
         String retorno;
         int tiempo_Menor = 0;
+         AlgoritmoFloyd algoritmo = new AlgoritmoFloyd();
 
-
+        tiempo_Menor = algoritmo.floyd();
 
         retorno = "Caso#" + caso + ":\n" +
                 tiempo_Menor;
@@ -70,10 +72,10 @@ public class computadores {
     }
 
     public static void numeros(String string) {
-        int inicio = string.indexOf(",");
+        int inicio = string.indexOf(" ");
         List<String> numeros = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
-            numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
+            numeros.add(String.valueOf(string.indexOf(" ", inicio + i)));
         }
         n = Integer.parseInt(numeros.get(0));
         m = Integer.parseInt(numeros.get(1));
@@ -83,10 +85,10 @@ public class computadores {
     }
 
     public static void numeros_2(String string) {
-        int inicio = string.indexOf(",");
+        int inicio = string.indexOf(" ");
         List<String> numeros = new ArrayList<>();
         for (int i = 1; i <= 4; i++) {
-            numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
+            numeros.add(String.valueOf(string.indexOf(" ", inicio + i)));
         }
         u = Integer.parseInt(numeros.get(0));
         v = Integer.parseInt(numeros.get(1));
