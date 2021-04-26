@@ -72,7 +72,7 @@ public class computadores {
     public static void numeros(String string) {
         int inicio = string.indexOf(",");
         List<String> numeros = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
         }
         n = Integer.parseInt(numeros.get(0));
@@ -85,7 +85,7 @@ public class computadores {
     public static void numeros_2(String string) {
         int inicio = string.indexOf(",");
         List<String> numeros = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
+        for (int i = 1; i <= 4; i++) {
             numeros.add(String.valueOf(string.indexOf(",", inicio + i)));
         }
         u = Integer.parseInt(numeros.get(0));
