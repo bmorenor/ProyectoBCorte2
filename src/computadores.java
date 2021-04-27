@@ -1,15 +1,18 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
-import java.util.Stack;
 
 /**
  * Class computadores
+ * INTEGRANTES:
+ * Brayan Camilo Moreno
+ * Miguel Angel Sierra
+ * Sergio Alejandro Hernandez
  */
 public class computadores {
-    private static Scanner read;
-    private static List<Caso> list_Casos;
-    private static List<Conexion> list_conexiones;
+    private static String t1 = "";
+    private static int caso = 0;
+    private static int min;
+    private static int max;
+    private static long[][] matriz;
     private static int t;
     private static int n;
     private static int m;
@@ -26,44 +29,58 @@ public class computadores {
      * @param args
      */
     public static void main(String[] args) {
+        Scanner read = new Scanner(System.in);
 
-        String t1 = read.nextLine();
+        t1 = read.nextLine();
         t = Integer.parseInt(t1.trim());
+        caso++;
         if (0 < t && t < 1000000) {
+
             for (int i = 1; i <= t; i++) {
                 String numeros = read.nextLine();
                 numeros(numeros);
+                if (a > b) {
+                    int c = a + 1;
+                    matriz = new long[c][c];
+                    min = b;
+                    max = a;
+                } else if (b > a) {
+                    int c = b + 1;
+                    matriz = new long[c][c];
+                    min = a;
+                    max = b;
+                }
+
                 if (m != 0) {
                     if (0 < n && n < 20000 && 0 < m && m < 50000 && 0 <= a && b <= (n - 1)) {
+
                         for (int j = 0; j < m; j++) {
                             String numeros_2 = read.nextLine();
                             numeros_2(numeros_2);
-                            Conexion conexion = new Conexion(u, v, w);
-                            list_conexiones.add(conexion);
+                            matriz[u][v] = w;
+                            matriz[v][u] = w;
+
                         }
-                        add(n, m, a, b, list_conexiones);
-                        System.out.println(minimo_Tiempo(list_Casos, i));
-                        list_conexiones.clear();
+
+                        System.out.println(minimo_Tiempo(max, min, caso));
+                        caso++;
+
                     }
                 } else {
-                    System.out.println("Inalcanzable");
+                    System.out.println("Caso#" + caso + ":\n" + "Inalcanzable");
+                    caso++;
                 }
 
             }
         }
     }
 
-    public static void add(int n, int m, int a, int b, List<Conexion> list) {
-        Caso caso = new Caso(n, m, a, b, list);
-        list_Casos.add(caso);
-    }
-
-    public static String minimo_Tiempo(List<Caso> lista_De_Casos, int caso) {
+    public static String minimo_Tiempo(int max, int min, int caso) {
         String retorno;
         int tiempo_Menor = 0;
-         AlgoritmoFloyd algoritmo = new AlgoritmoFloyd();
 
-        tiempo_Menor = algoritmo.floyd();
+
+        tiempo_Menor = floyd(matriz, max, min);
 
         retorno = "Caso#" + caso + ":\n" +
                 tiempo_Menor;
@@ -72,27 +89,86 @@ public class computadores {
     }
 
     public static void numeros(String string) {
-        int inicio = string.indexOf(" ");
-        List<String> numeros = new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
-            numeros.add(String.valueOf(string.indexOf(" ", inicio + i)));
-        }
-        n = Integer.parseInt(numeros.get(0));
-        m = Integer.parseInt(numeros.get(1));
-        a = Integer.parseInt(numeros.get(2));
-        b = Integer.parseInt(numeros.get(3));
-        numeros.clear();
+        String primero = string.split(" ")[0];
+        String segundo = string.split(" ")[1];
+        String tercero = string.split(" ")[2];
+        String cuarto = string.split(" ")[3];
+        n = Integer.parseInt(primero);
+        m = Integer.parseInt(segundo);
+        a = Integer.parseInt(tercero);
+        b = Integer.parseInt(cuarto);
+
     }
 
     public static void numeros_2(String string) {
-        int inicio = string.indexOf(" ");
-        List<String> numeros = new ArrayList<>();
-        for (int i = 1; i <= 4; i++) {
-            numeros.add(String.valueOf(string.indexOf(" ", inicio + i)));
+        String primero = string.split(" ")[0];
+        String segundo = string.split(" ")[1];
+        String tercero = string.split(" ")[2];
+        u = Integer.parseInt(primero);
+        v = Integer.parseInt(segundo);
+        w = Integer.parseInt(tercero);
+
+
+    }
+
+    public static int floyd(long[][] adyacencia, long max, long min) {
+        int matriz1 = adyacencia.length;
+        long D[][] = adyacencia;
+
+        String enlaces[][] = new String[matriz1][matriz1];
+        String[][] aux_enlaces = new String[adyacencia.length][adyacencia.length];
+
+        for (int i = 0; i < matriz1; i++) {
+            for (int j = 0; j < matriz1; j++) {
+                enlaces[i][j] = "";
+                aux_enlaces[i][j] = "";
+            }
         }
-        u = Integer.parseInt(numeros.get(0));
-        v = Integer.parseInt(numeros.get(1));
-        w = Integer.parseInt(numeros.get(2));
-        numeros.clear();
+        String enl_rec = "";
+        for (int k = 0; k < matriz1; k++) {
+            for (int i = 0; i < matriz1; i++) {
+                for (int j = 0; j < matriz1; j++) {
+                    float aux = D[i][j];
+                    float aux2 = D[i][k];
+                    float aux3 = D[k][j];
+                    float aux4 = aux2 + aux3;
+                    float result = Math.min(aux, aux4);
+                    if (aux != aux4) {
+                        if (result == aux4) {
+                            enl_rec = "";
+                            aux_enlaces[i][j] = k + "";
+                            enlaces[i][j] = enlaces(i, k, aux_enlaces, enl_rec) + (k);
+                        }
+                    }
+                    D[i][j] = (long) result;
+                }
+            }
+        }
+
+        String cadena = "";
+        for (int i = 0; i < matriz1; i++) {
+            for (int j = 0; j < matriz1; j++) {
+                cadena += D[i][j] + " ";
+            }
+            cadena += "\n";
+        }
+
+        String enlacesres = "";
+
+        enlacesres = D[(int) min][(int) max] + "";
+        int resultado = Integer.parseInt(enlacesres);
+
+
+        return resultado;
+    }
+
+    public static String enlaces(int i, int k, String[][] aux_enlaces, String enl_rec) {
+        if (aux_enlaces[i][k].equals("") == true) {
+            return "";
+        } else {
+            enl_rec += enlaces(i, Integer.parseInt(aux_enlaces[i][k].toString()), aux_enlaces, enl_rec) + (Integer.parseInt(aux_enlaces[i][k].toString()) + 1) + " , ";
+
+            return enl_rec;
+        }
     }
 }
